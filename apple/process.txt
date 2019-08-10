@@ -1,0 +1,56 @@
+1. Run
+	exp build:ios
+	Build the app by letting expo do all the settings
+
+	Remove the distribution - push certificate and the provisioning profile, keep the App ID.
+
+(cd c:\OpenSSL-Win64\bin)
+
+2. Create the request
+	- create the key
+	.\openssl genrsa -out hemlyftet.key 2048
+	- create the request
+	.\openssl req -new -key hemlyftet.key -out hemlyftet.certSigningRequest -subj "/emailAddress=bmoy69@gmail.com, CN=Vasilieios Moysidis, C=GR"
+
+3. Create certificate 
+	- select the Production App Store and Ad Hoc option.
+	- upload request hemlyftet.certSigningRequest
+	- download certificate 
+	- rename to hemlyftet.cer 
+
+4. Edit App ID
+	- enable push  notifications
+	- create push certificate
+	- upload request hemlyftet.certSigningRequest
+	- download the certificate
+	- rename it to hemlyftetpush.cer
+
+(-. Add devices UDID if you have not done that already)
+
+
+5. Create provisioning profile 
+	- select Ad Hoc option.
+	- select the hemlyftet.cer certificate you created above
+	- select the devices you want it to run on
+	
+
+6. Create p12 file
+	.\openssl x509 -in hemlyftet.cer -inform DER -out hemlyftet.pem -outform PEM
+	.\openssl pkcs12 -export -inkey hemlyftet.key -in hemlyftet.pem -out hemlyftet.p12
+
+	.\openssl x509 -in hemlyftetpush.cer -inform DER -out hemlyftetpush.pem -outform PEM
+	.\openssl pkcs12 -export -inkey hemlyftet.key -in hemlyftetpush.pem -out hemlyftetpush.p12
+
+	password: bmoy
+
+7. Move the created files in the /expo projects/(project)/apple folder
+	hemlyftet.p12
+	hemlyftetpush.p12
+	hemlyftet.mobileprovision
+8. Run
+	exp build:ios -c
+	- ? How would you like to upload your credentials?
+ 	    I will provide all the credentials and files needed, Expo does limited validation
+	- Upload p12 file ./apple/hemlyftet.p12
+	- Upload p12 file ./apple/hemlyftetpush.p12
+	- Upload provisioning file ./apple/hemlyftet.mobileprovision

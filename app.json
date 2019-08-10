@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Hemlyftet",
+    "description": "Barnpassning och privatundervisning. För de som söker personal/jobb.",
+    "slug": "hemlyftet",
+    "privacy": "public",
+    "scheme": "hemlyftet",
+    "sdkVersion": "32.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "se.hemlyftet.hemlyftetnew",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Hemlyftet behöver veta din plats för att underlätta sökningar och ge mera relevanta resultat som passar bättre dina behov.",
+        "NSCameraUsageDescription": "Hemlyftet behöver använda din kamera för att kunna ta bilder för din profil."
+      },
+    },
+    "android": {
+      "package": "se.hemlyftet.hemlyftet",
+      "versionCode": 2
+
+    }
+  }
+}
